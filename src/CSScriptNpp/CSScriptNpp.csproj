@@ -286,9 +286,6 @@
     <None Include="Resources\debug.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\DbMon.exe" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\ConsoleHost.exe" />
   </ItemGroup>
   <ItemGroup>

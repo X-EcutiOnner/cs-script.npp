@@ -30,7 +30,7 @@ https://tooomm.github.io/github-release-stats/?username=oleg-shilo&repository=cs
 
    - Update nppPluginList\src\pl.x64.json
    - Update nppPluginList\src\pl.x86.json
-   - Commit and Push to originprojects
+   - Commit and Push to origin 
    - Create PR from https://github.com/oleg-shilo/npp-plugins-x64
 
 
