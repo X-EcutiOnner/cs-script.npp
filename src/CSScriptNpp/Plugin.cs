@@ -129,8 +129,8 @@ namespace CSScriptNpp
         static string integrationChecks =>
             $"Runtime.cscs_asm: {Runtime.cscs_asm.HasText()}; " +
             $"Runtime.syntaxer_asm: {Runtime.syntaxer_asm.HasText()}; " +
-            $"Runtime.cscs_asm: {File.Exists(Runtime.cscs_asm)}; " +
-            $"Runtime.syntaxer_asm: {File.Exists(Runtime.syntaxer_asm)}";
+            $"Runtime.cscs_asm.exists: {File.Exists(Runtime.cscs_asm)}; " +
+            $"Runtime.syntaxer_asm.exists: {File.Exists(Runtime.syntaxer_asm)}";
 
         //must be in a separate method to allow proper assembly probing
         static void LoadIntellisenseCommands(ref int cmdIndex)
@@ -145,6 +145,10 @@ namespace CSScriptNpp
                     var intcheck = integrationChecks;
                     if (!CSScriptHelper.Integration.IsCssIntegrated())
                     {
+#if DEBUG
+                        Debugger.Launch();
+#endif
+                        PluginEnv.CustomLog("---");
                         PluginEnv.CustomLog("Checking CS-Script integration: not integrated...");
                         PluginEnv.CustomLog("    Checks: " + intcheck);
 
@@ -153,7 +157,10 @@ namespace CSScriptNpp
                             CSScriptHelper.Integration.IntegrateCSScript();
                             var integrated = CSScriptHelper.Integration.IsCssIntegrated();
                             if (integrated)
-                                CSScriptHelper.Integration.ShowIntegrationInfo();
+                            {
+                                if (Config.Instance.LastUpdateInfoShown != Runtime.cscs_asm)
+                                    CSScriptHelper.Integration.ShowIntegrationInfo();
+                            }
                             else
                                 CSScriptHelper.Integration.ShowIntegrationWarning();
 

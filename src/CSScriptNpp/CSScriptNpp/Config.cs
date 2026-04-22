@@ -79,6 +79,7 @@ namespace CSScriptNpp
         public bool NativeAutoCompletionChecked = false;
         public string ReleaseNotesViewedFor = "";
         public string LastUpdatesCheckDate = DateTime.MinValue.ToString("yyyy-MM-dd");
+        public string LastUpdateInfoShown = "";
         public string ScriptHistory = "";
         public int SciptHistoryMaxCount = 10;
         public int CollectionItemsInTooltipsMaxCount = 15;
@@ -124,6 +125,7 @@ namespace CSScriptNpp
                     SetValue(Section, nameof(CustomEngineAsm), CustomEngineAsm);
                     SetValue(Section, nameof(ReleaseNotesViewedFor), ReleaseNotesViewedFor);
                     SetValue(Section, nameof(ScriptHistory), ScriptHistory);
+                    SetValue(Section, nameof(LastUpdateInfoShown), LastUpdateInfoShown);
                     SetValue(Section, nameof(SciptHistoryMaxCount), SciptHistoryMaxCount);
                     SetValue(Section, nameof(CollectionItemsInTooltipsMaxCount), CollectionItemsInTooltipsMaxCount);
                     SetValue(Section, nameof(CollectionItemsInVisualizersMaxCount), CollectionItemsInVisualizersMaxCount);
@@ -187,6 +189,7 @@ namespace CSScriptNpp
                 BlockLocalDebugOutputContaining = GetValue(Section, nameof(BlockLocalDebugOutputContaining), BlockLocalDebugOutputContaining);
                 SyncSecondaryPanelsWithProjectPanel = GetValue(Section, nameof(SyncSecondaryPanelsWithProjectPanel), SyncSecondaryPanelsWithProjectPanel);
                 ShowDebugPanel = GetValue(Section, nameof(ShowDebugPanel), ShowDebugPanel); //ignore; do not show Debug panel as it is heavy. It will be displayed at the first debug step anyway.
+                LastUpdateInfoShown = GetValue(Section, nameof(LastUpdateInfoShown), LastUpdateInfoShown);
                 ScriptHistory = GetValue(Section, nameof(ScriptHistory), ScriptHistory, 1024 * 40);
                 SciptHistoryMaxCount = GetValue(Section, nameof(SciptHistoryMaxCount), SciptHistoryMaxCount);
                 CollectionItemsInTooltipsMaxCount = GetValue(Section, nameof(CollectionItemsInTooltipsMaxCount), CollectionItemsInTooltipsMaxCount);

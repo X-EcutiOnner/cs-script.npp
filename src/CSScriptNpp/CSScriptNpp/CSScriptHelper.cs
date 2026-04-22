@@ -40,9 +40,9 @@ namespace CSScriptNpp
 
             CSScriptHelper.Integration.DisableLegacyIntegration();
 
-            Syntaxer.cscs_asm = () => Runtime.cscs_asm;
-            Syntaxer.syntaxer_asm = () => Runtime.syntaxer_asm;
-            Syntaxer.syntaxer_port = () => Runtime.syntaxer_port;
+            Syntaxer.cscs_asm = () => cscs_asm;
+            Syntaxer.syntaxer_asm = () => syntaxer_asm;
+            Syntaxer.syntaxer_port = () => syntaxer_port;
 
             Syntaxer.StartServer(onlyIfNotRunning: true);
             Initialized = true;
@@ -213,6 +213,9 @@ namespace CSScriptNpp
                 {
                     if (Runtime.cscs_asm.Contains(Runtime.dependenciesDirRoot)) // embedded engine
                     {
+                        PluginEnv.CustomLog("DisableLegacyIntegration...");
+                        PluginEnv.CustomLog("    Runtime.cscs_asm: " + Runtime.cscs_asm);
+                        PluginEnv.CustomLog("    Runtime.dependenciesDirRoot: " + Runtime.dependenciesDirRoot);
                         Runtime.cscs_asm = null;
                         Runtime.syntaxer_asm = null;
                     }
@@ -296,6 +299,8 @@ namespace CSScriptNpp
                 var file = Runtime.dependenciesDirRoot.PathJoin("cs-script.integration-info.md");
                 File.WriteAllText(file, content.ToString());
                 Npp.Editor.OpenFile(file, true);
+                Config.Instance.LastUpdateInfoShown = Runtime.cscs_asm;// Runtime.syntaxer_asm is less critical so do not use it for tracking
+                Config.Instance.Save();
             }
 
             public static void ShowIntegrationWarning()
@@ -555,7 +560,7 @@ echo {(IsCSScriptInstalled ? "Updating" : "Installing")}...
                         }
                         else
                             if (!string.IsNullOrEmpty(line) && !line.Contains("at csscript.CSExecutor."))
-                            output.AppendLine(line);
+                                output.AppendLine(line);
                     }
                    );
 
